@@ -1,0 +1,25 @@
+# Blueprint do Render para a API. O banco fica no Neon e o site na Vercel.
+services:
+  - type: web
+    name: financeiro-api
+    runtime: node
+    plan: free
+    region: virginia
+    rootDir: api
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm run start:prod
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: '24'
+      - key: APP_TIMEZONE
+        value: America/Sao_Paulo
+      - key: JWT_SECRET
+        generateValue: true
+      # Preenchidos no painel do Render na criação:
+      - key: DATABASE_URL # connection string do Neon
+        sync: false
+      - key: CORS_ORIGIN # endereço do site na Vercel, ex.: https://financeiro.vercel.app
+        sync: false

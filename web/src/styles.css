@@ -1,0 +1,152 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/schibsted-grotesk';
+
+/*
+ * Tokens. Papel frio, tinta verde-escura (cédula), ação em violeta (nota de R$ 5).
+ * Séries de gráfico vêm da paleta validada (azul = receita, laranja = despesa).
+ */
+:root {
+  color-scheme: light;
+  --paper: #f2f4f0;
+  --surface: #ffffff;
+  --sunken: #e9ede8;
+  --ink: #17231e;
+  --ink-2: #4b5a53;
+  --ink-3: #6f7d76;
+  --rule: #dce2dd;
+  --rule-strong: #c3ccc6;
+  --accent: #4936b8;
+  --accent-hover: #3b2a9e;
+  --accent-ink: #ffffff;
+  --accent-soft: #ebe8fa;
+  --pos: #17714a;
+  --neg: #b4372f;
+  --warn: #8f5a00;
+  --warn-soft: #fbf1dc;
+  --neg-soft: #fbe7e5;
+  --pos-soft: #e3f3ea;
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-muted: #a8b3ad;
+  --grid: #e3e8e4;
+  /* Régua do gasto seguro: tons da própria tinta, do mais forte ao mais leve. */
+  --ruler-1: #17231e;
+  --ruler-2: #3f5048;
+  --ruler-3: #6c7c74;
+  --ruler-4: #98a69f;
+  --ruler-spent: #eb6834;
+  --ruler-free: #4936b8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --paper: #111613;
+    --surface: #181e1b;
+    --sunken: #0d110f;
+    --ink: #e6ece8;
+    --ink-2: #a7b3ac;
+    --ink-3: #85928b;
+    --rule: #28302c;
+    --rule-strong: #38423d;
+    --accent: #9c8ff2;
+    --accent-hover: #b2a8f6;
+    --accent-ink: #15102e;
+    --accent-soft: #241f45;
+    --pos: #57c993;
+    --neg: #f0837a;
+    --warn: #e2ad4d;
+    --warn-soft: #2e2512;
+    --neg-soft: #34191a;
+    --pos-soft: #14291f;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-muted: #56635c;
+    --grid: #232a26;
+    --ruler-1: #e6ece8;
+    --ruler-2: #b3c0b9;
+    --ruler-3: #84928b;
+    --ruler-4: #5b6862;
+    --ruler-spent: #d95926;
+    --ruler-free: #9c8ff2;
+  }
+}
+
+@theme inline {
+  --font-sans: 'Schibsted Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-pos: var(--pos);
+  --color-neg: var(--neg);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-neg-soft: var(--neg-soft);
+  --color-pos-soft: var(--pos-soft);
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--paper);
+  min-height: 100vh;
+}
+
+/*
+ * Valores: algarismos proporcionais por padrão (nesta fonte o 'tnum' também alarga
+ * vírgula e ponto, o que fica estranho em números grandes). Em tabelas e listas, onde
+ * colunas precisam alinhar, os algarismos viram tabulares.
+ */
+.num {
+  font-variant-numeric: lining-nums proportional-nums;
+}
+table .money,
+.tabular .money {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.money .punct {
+  font-variant-numeric: lining-nums proportional-nums;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Recharts: tipografia e eixos recessivos. */
+.recharts-cartesian-axis-tick-value {
+  font-size: 12px;
+  fill: var(--ink-3);
+}
+.recharts-legend-item-text {
+  color: var(--ink-2) !important;
+  font-size: 13px;
+}
